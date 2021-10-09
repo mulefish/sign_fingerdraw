@@ -2,7 +2,6 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 const Canvas = ({ width, height }) => {
     // const r = Math.random()
     // return <div>hello {width} and {height} !! {r}</div>
-
     const canvasRef = useRef(null);
     const [isPainting, setIsPainting] = useState(false);
     const [mousePosition, setMousePosition] = useState(undefined);
@@ -84,9 +83,9 @@ const Canvas = ({ width, height }) => {
         const canvas = canvasRef.current;
         const context = canvas.getContext('2d');
         if (context) {
-            context.strokeStyle = 'red';
+            context.strokeStyle = 'black';
             context.lineJoin = 'round';
-            context.lineWidth = 5;
+            context.lineWidth = 1;
 
             context.beginPath();
             context.moveTo(originalMousePosition.x, originalMousePosition.y);
