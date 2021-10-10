@@ -6,8 +6,7 @@ const width = window.innerWidth;
 const height = window.innerHeight * 0.3;
 const border = {
   border: '1px solid #e0e0e0',
-};
-
+}
 const note = {
   position: 'relative',
   top: '10px',

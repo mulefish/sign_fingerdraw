@@ -33,14 +33,14 @@ const Canvas = ({ width, height, saveTrigger, clearTrigger }) => {
     // return <div>hello {width} and {height} !! {r}</div>
     const canvasRef = useRef(null);
     const [isPainting, setIsPainting] = useState(false);
-    const [mousePosition, setMousePosition] = useState(undefined);
+    const [mousePosition, setXY] = useState(undefined);
 
 
 
     const startPaint = useCallback((event) => {
-        const coordinates = getCoordinates(event);
-        if (coordinates) {
-            setMousePosition(coordinates);
+        const xy = getXY(event);
+        if (xy) {
+            setXY(xy);
             setIsPainting(true);
         }
     }, []);
@@ -83,10 +83,11 @@ const Canvas = ({ width, height, saveTrigger, clearTrigger }) => {
         }
         const canvas = canvasRef.current;
         canvas.addEventListener('mousedown', startPaint);
-        return;
         // return () => {
         //     canvas.removeEventListener('mousedown', startPaint);
         // };
+        return;
+
     }, [startPaint]);
 
 
@@ -96,10 +97,10 @@ const Canvas = ({ width, height, saveTrigger, clearTrigger }) => {
     const paint = useCallback(
         (event) => {
             if (isPainting) {
-                const newMousePosition = getCoordinates(event);
-                if (mousePosition && newMousePosition) {
-                    drawLine(mousePosition, newMousePosition);
-                    setMousePosition(newMousePosition);
+                const newXY = getXY(event);
+                if (mousePosition && newXY) {
+                    drawLine(mousePosition, newXY);
+                    setXY(newXY);
                 }
             }
         },
@@ -119,7 +120,7 @@ const Canvas = ({ width, height, saveTrigger, clearTrigger }) => {
 
     const exitPaint = useCallback(() => {
         setIsPainting(false);
-        setMousePosition(undefined);
+        setXY(undefined);
     }, []);
 
     useEffect(() => {
@@ -135,16 +136,15 @@ const Canvas = ({ width, height, saveTrigger, clearTrigger }) => {
         };
     }, [exitPaint]);
 
-    const getCoordinates = (event) => {
+    const getXY = (event) => {
         if (!canvasRef.current) {
             return;
         }
-
         const canvas = canvasRef.current;
         return { x: event.pageX - canvas.offsetLeft, y: event.pageY - canvas.offsetTop };
     };
 
-    const drawLine = (originalMousePosition, newMousePosition) => {
+    const drawLine = (origXY, newXY) => {
         if (!canvasRef.current) {
             return;
         }
@@ -156,8 +156,8 @@ const Canvas = ({ width, height, saveTrigger, clearTrigger }) => {
             context.lineWidth = 1;
 
             context.beginPath();
-            context.moveTo(originalMousePosition.x, originalMousePosition.y);
-            context.lineTo(newMousePosition.x, newMousePosition.y);
+            context.moveTo(origXY.x, origXY.y);
+            context.lineTo(newXY.x, newXY.y);
             context.closePath();
 
             context.stroke();
