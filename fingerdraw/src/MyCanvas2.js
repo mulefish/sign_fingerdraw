@@ -35,6 +35,8 @@ const Canvas = ({ width, height, saveTrigger, clearTrigger }) => {
     const [isPainting, setIsPainting] = useState(false);
     const [mousePosition, setMousePosition] = useState(undefined);
 
+
+
     const startPaint = useCallback((event) => {
         const coordinates = getCoordinates(event);
         if (coordinates) {
@@ -43,17 +45,17 @@ const Canvas = ({ width, height, saveTrigger, clearTrigger }) => {
         }
     }, []);
 
-    function doSave() {
+
+
+    const doSave = () => {
         const canvas = canvasRef.current;
         const image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
-        console.log(`%c ${saveTrigger} TODO: Save blob to server!`, BLUE)
+        console.log(`%c ${saveTrigger} TODO! Save blob to server!`, ORANGE)
         // eslint-disable-next-line no-unused-vars
         const blob = dataURLtoBlob(image); // Ready to save!  
         document.getElementById("imageToSave").src = image;
-
     }
-    function doClear() {
-
+    const doClear = () => {
         const canvas = canvasRef.current;
         const context = canvas.getContext('2d');
         context.clearRect(0, 0, canvas.width, canvas.height);
@@ -64,12 +66,12 @@ const Canvas = ({ width, height, saveTrigger, clearTrigger }) => {
         if (saveTrigger > 0) {
             doSave()
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [saveTrigger]);
 
     useEffect(() => {
         if (clearTrigger > 0) {
             doClear()
-
         }
     }, [clearTrigger]);
 
@@ -86,6 +88,10 @@ const Canvas = ({ width, height, saveTrigger, clearTrigger }) => {
         //     canvas.removeEventListener('mousedown', startPaint);
         // };
     }, [startPaint]);
+
+
+
+
 
     const paint = useCallback(
         (event) => {
