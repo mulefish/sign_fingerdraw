@@ -1,5 +1,31 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-const Canvas = ({ width, height }) => {
+const GRAY = "background:#e0e0e0;"
+const RED = "background:#ff0000;"
+const ORANGE = "background:#FFD580;"
+const BLUE = "background:#ADD8E6;"
+
+
+function dataURLtoBlob(dataURL) {
+    // Make it easy to save as a file
+    let array, binary, i, len;
+    // Note to self: "The atob() method decodes a base-64 encoded string"
+    binary = atob(dataURL.split(',')[1]);
+    array = [];
+    i = 0;
+    len = binary.length;
+    while (i < len) {
+        array.push(binary.charCodeAt(i));
+        i++;
+    }
+    const blob = new Blob([new Uint8Array(array)], {
+        type: 'image/png'
+    });
+    return blob;
+    // TODO! Send the blob to the server!
+};
+
+
+const Canvas = ({ width, height, saveTrigger, clearTrigger }) => {
     // const r = Math.random()
     // return <div>hello {width} and {height} !! {r}</div>
     const canvasRef = useRef(null);
@@ -15,14 +41,38 @@ const Canvas = ({ width, height }) => {
     }, []);
 
     useEffect(() => {
+        if (saveTrigger > 0) {
+            console.log(`%c ${saveTrigger}`, BLUE)
+            const canvas = canvasRef.current;
+            const image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+            const blob = dataURLtoBlob(image); // Ready to save!  
+            document.getElementById("imageToSave").src = image;
+        }
+    }, [saveTrigger]);
+
+    useEffect(() => {
+        if (clearTrigger > 0) {
+            console.log(`%c ${clearTrigger}`, ORANGE)
+            const canvas = canvasRef.current;
+            const context = canvas.getContext('2d');
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            document.getElementById("imageToSave").src = "";
+
+        }
+    }, [clearTrigger]);
+
+
+
+    useEffect(() => {
         if (!canvasRef.current) {
             return;
         }
         const canvas = canvasRef.current;
         canvas.addEventListener('mousedown', startPaint);
-        return () => {
-            canvas.removeEventListener('mousedown', startPaint);
-        };
+        return;
+        // return () => {
+        //     canvas.removeEventListener('mousedown', startPaint);
+        // };
     }, [startPaint]);
 
     const paint = useCallback(
@@ -84,7 +134,7 @@ const Canvas = ({ width, height }) => {
         const context = canvas.getContext('2d');
         if (context) {
             context.strokeStyle = 'black';
-            context.lineJoin = 'round';
+            // context.lineJoin = 'round';
             context.lineWidth = 1;
 
             context.beginPath();
