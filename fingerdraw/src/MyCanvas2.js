@@ -1,9 +1,12 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
+// eslint-disable-next-line no-unused-vars
 const GRAY = "background:#e0e0e0;"
+// eslint-disable-next-line no-unused-vars
 const RED = "background:#ff0000;"
+// eslint-disable-next-line no-unused-vars
 const ORANGE = "background:#FFD580;"
+// eslint-disable-next-line no-unused-vars
 const BLUE = "background:#ADD8E6;"
-
 
 function dataURLtoBlob(dataURL) {
     // Make it easy to save as a file
@@ -40,23 +43,32 @@ const Canvas = ({ width, height, saveTrigger, clearTrigger }) => {
         }
     }, []);
 
+    function doSave() {
+        const canvas = canvasRef.current;
+        const image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+        console.log(`%c ${saveTrigger} TODO: Save blob to server!`, BLUE)
+        // eslint-disable-next-line no-unused-vars
+        const blob = dataURLtoBlob(image); // Ready to save!  
+        document.getElementById("imageToSave").src = image;
+
+    }
+    function doClear() {
+
+        const canvas = canvasRef.current;
+        const context = canvas.getContext('2d');
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        const widget = document.getElementById("imageToSave");
+        widget.src = "";
+    }
     useEffect(() => {
         if (saveTrigger > 0) {
-            console.log(`%c ${saveTrigger}`, BLUE)
-            const canvas = canvasRef.current;
-            const image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
-            const blob = dataURLtoBlob(image); // Ready to save!  
-            document.getElementById("imageToSave").src = image;
+            doSave()
         }
     }, [saveTrigger]);
 
     useEffect(() => {
         if (clearTrigger > 0) {
-            console.log(`%c ${clearTrigger}`, ORANGE)
-            const canvas = canvasRef.current;
-            const context = canvas.getContext('2d');
-            context.clearRect(0, 0, canvas.width, canvas.height);
-            document.getElementById("imageToSave").src = "";
+            doClear()
 
         }
     }, [clearTrigger]);
