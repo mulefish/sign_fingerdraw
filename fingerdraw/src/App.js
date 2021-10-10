@@ -20,7 +20,7 @@ function App() {
       <button onClick={() => setClearTrigger(clearTrigger + 1)}>clear</button>
       <button onClick={() => setSaveTrigger(saveTrigger + 1)}>save</button>
       <hr />
-      <img src="" id='imageToSave' width='100'></img>
+      <img alt='signature' style={wrapper} src="" id='imageToSave' width='100'></img>
     </div>)
 }
 export default App
