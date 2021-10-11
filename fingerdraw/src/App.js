@@ -1,7 +1,7 @@
 import React from 'react'
 // import { useState } from 'react';
 import Canvas from './MyCanvas2.js'
-import saveOrClearHook from './hooks/SaveOrClearHook.js';
+import useSaveOrClearHook from './hooks/useSaveOrClearHook.js';
 
 const width = window.innerWidth;
 const height = window.innerHeight * 0.3;
@@ -25,7 +25,7 @@ const dot = {
 
 function App() {
 
-  const [choice, hideOrShowCss, handleChoiceFunction] = saveOrClearHook();
+  const [choice, handleChoiceFunction] = useSaveOrClearHook();
 
   return (
     <div>
@@ -35,7 +35,7 @@ function App() {
       <button onClick={() => handleChoiceFunction("clear")}>clear</button>
       <button onClick={() => handleChoiceFunction("save")}>save</button>
       <hr />
-      <div style={hideOrShowCss}>
+      <div>
         <img alt='signature' style={border} src="" id='imageToSave' width='100'></img>
       </div>
 
