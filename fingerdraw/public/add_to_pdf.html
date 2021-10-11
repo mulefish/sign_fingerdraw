@@ -1,0 +1,65 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <script src="https://unpkg.com/pdf-lib@1.4.0"></script>
+    <script src="https://unpkg.com/downloadjs@1.4.7"></script>
+  </head>
+
+  <body>
+    Button to pretent to sign this!
+    <button onclick="modifyPdf()">Modify PDF</button>
+    <img src="siggy.png" id="siggy"> </img>
+  </body>
+
+  <script>
+    const { degrees, PDFDocument, rgb, StandardFonts } = PDFLib
+
+    async function modifyPdf() {
+      // Fetch an existing PDF document
+      const url = 'A_Very_Important_Document.pdf'
+  		const existingPdfBytes = await fetch(url).then(res => res.arrayBuffer())
+
+      // Load a PDFDocument from the existing PDF bytes
+      const pdfDoc = await PDFDocument.load(existingPdfBytes)
+
+      // Embed the Helvetica font
+      const helveticaFont = await pdfDoc.embedFont(StandardFonts.Helvetica)
+
+      // Get the first page of the document
+      const pages = pdfDoc.getPages()
+      const firstPage = pages[0]
+
+      // Get the width and height of the first page
+      const { width, height } = firstPage.getSize()
+
+      // Draw a string of text diagonally across the first page
+      firstPage.drawText('Paul A. Montgomery', {
+        x: 150,
+        y: height / 8,
+        size: 30,
+        font: helveticaFont,
+        color: rgb(0, 0.9, 0),
+        // rotate: degrees(-10),
+      })
+
+      // Serialize the PDFDocument to bytes (a Uint8Array)
+      const pdfBytes = await pdfDoc.save()
+
+    const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+    const blobUrl = URL.createObjectURL(blob);
+    document.getElementById("iframe").src = blobUrl;
+ 
+
+
+			// Trigger the browser to download the PDF document
+        // (pdfBytes, "pdf-lib_modification_example.pdf", "application/pdf");
+        // document.getElementById("iframe").src = url
+    }
+  </script>
+
+    <iframe id='iframe' src="A_Very_Important_Document.pdf" height="500" width="1200">
+
+    </iframe>
+
+
+</html>

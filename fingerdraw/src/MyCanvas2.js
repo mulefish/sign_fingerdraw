@@ -153,7 +153,7 @@ const Canvas = ({ width, height, actionChoice }) => {
     if (context) {
       context.strokeStyle = "black";
       // context.lineJoin = 'round';
-      context.lineWidth = 1;
+      context.lineWidth = 6;
 
       context.beginPath();
       context.moveTo(origXY.x, origXY.y);

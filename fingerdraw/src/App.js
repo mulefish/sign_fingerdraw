@@ -48,15 +48,14 @@ function App() {
           style={border}
           src=""
           id="imageToSave"
-          width="100"
+          width="200"
         ></img>
       </div>
       <div style={note}>
         TODOs!<br></br>
-        <div style={dot} ></div> make touch aware!<br></br>
-        <div style={dot} ></div> insert into PDF!<br></br>
-        <div style={dot} ></div> maybe convert to react native...<br></br>
-
+        <div style={dot}></div> make touch aware!<br></br>
+        <div style={dot}></div> insert into PDF!<br></br>
+        <div style={dot}></div> maybe convert to react native...<br></br>
         <br />
       </div>
     </div>
