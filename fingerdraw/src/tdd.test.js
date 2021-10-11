@@ -79,27 +79,17 @@ describe('useExampleCustomReactHook', () => {
     });
 
 
-    // it('SECOND', () => {
-    //     // const { result } = renderHook(saveOrClearHook);
+    it('save', () => {
 
-    //     const [choice, handleChoice] = renderHook(saveOrClearHook());
+        const { result } = renderHook(saveOrClearHook);
+        expect(result.current.choice).toEqual(undefined);
 
+        act(() => {
+            result.current.handleChoice("save");
+        });
 
-    //     // console.log(result)
-    //     expect(true).toEqual(true);
-    // });
-
-
-
-    // it("agogo", () => {
-    //     const { result } = renderHook(useExampleCustomReactHook);
-
-    //     message,
-    //     setMessage
-
-    //     expect(true).toBe(true)
-    // });
-
+        expect(result.current.choice).toEqual("save");
+    });
 
 
 });
