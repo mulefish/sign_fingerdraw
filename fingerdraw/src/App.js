@@ -51,6 +51,14 @@ function App() {
           width="100"
         ></img>
       </div>
+      <div style={note}>
+        TODOs!<br></br>
+        <div style={dot} ></div> make touch aware!<br></br>
+        <div style={dot} ></div> insert into PDF!<br></br>
+        <div style={dot} ></div> maybe convert to react native...<br></br>
+
+        <br />
+      </div>
     </div>
   );
 }
