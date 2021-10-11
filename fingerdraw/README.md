@@ -20,8 +20,13 @@ npm test tdd.test.js
 
 Here is screen cap
 ![screencap.png](screencap.png)
-npm test tdd.test.js 
+npm test tdd.test.js
 
 # Deps
+
 npm install --save-dev @testing-library/react-hooks
 npm install --save-dev react-test-renderer
+
+# Notes
+
+// eslint-disable-next-line no-unused-vars
