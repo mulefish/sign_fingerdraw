@@ -8,3 +8,6 @@ Maybe convert to react native
 
 # MUST DO:
 Read about how 'e-signatures' work
+
+# TDD
+npm test tdd.test.js 
