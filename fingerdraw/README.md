@@ -11,3 +11,7 @@ Read about how 'e-signatures' work
 
 # TDD
 npm test tdd.test.js 
+
+# Deps
+npm install --save-dev @testing-library/react-hooks
+npm install --save-dev react-test-renderer

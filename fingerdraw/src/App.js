@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from 'react';
 import Canvas from './MyCanvas2.js'
+import saveOrClearHook from './hooks/SaveOrClearHook.js';
 
 const width = window.innerWidth;
 const height = window.innerHeight * 0.3;
@@ -23,6 +24,10 @@ const dot = {
 }
 
 function App() {
+
+  const [choice, handleChoice] = saveOrClearHook();
+
+
   const [saveTrigger, setSaveTrigger] = useState(0);
   const [clearTrigger, setClearTrigger] = useState(0);
   const [showImage, setShowImage] = useState({ display: 'none' });
@@ -39,13 +44,27 @@ function App() {
       setClearTrigger(clearTrigger + 1)
       setSaveTrigger(0)
       setShowImage({ display: 'none' });
+
+      // handleChoice("clear")
+      // console.log("HELLO CHOICE " + choice)
+
+      handleChoice("clear")
+      console.log("HELLO CHOICE " + choice)
+
     } else {
       setClearTrigger(0)
       setSaveTrigger(saveTrigger + 1)
       setShowImage({ display: 'block' });
+
+      handleChoice("save")
+      console.log("HELLO CHOICE " + choice)
+
+
     }
   }
 
+  // handleChoice("save")
+  // console.log("HELLO CHOICE " + choice)
 
 
 
