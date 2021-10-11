@@ -1,28 +1,24 @@
-//import React from "react";
-//import { render, unmountComponentAtNode } from "react-dom";
-import { renderHook, act } from '@testing-library/react-hooks';
-//import App from "./App";
-import useSaveOrClearHook from './hooks/useSaveOrClearHook.js';
+import { renderHook, act } from "@testing-library/react-hooks";
+import useSaveOrClearHook from "./hooks/useSaveOrClearHook.js";
 
-describe('Test the hooks', () => {
-
-    it('set to save', () => {
-        const { result } = renderHook(useSaveOrClearHook);
-        expect(result.current.choice).toEqual(undefined);
-        act(() => {
-            result.current.handleChoiceFunction("save");
-        });
-        expect(result.current.choice).toEqual("save");
-        //expect(result.current.hideOrShowCss['display']).toEqual("block");
+describe("Test the hooks", () => {
+  it("set to save", () => {
+    const { result } = renderHook(useSaveOrClearHook);
+    expect(result.current.choice).toEqual(undefined);
+    act(() => {
+      result.current.handleChoiceFunction("save");
     });
+    expect(result.current.choice).toEqual("save");
+    expect(result.current.hideOrShowCss["display"]).toEqual("block");
+  });
 
-    it('set to clear', () => {
-        const { result } = renderHook(useSaveOrClearHook);
-        expect(result.current.choice).toEqual(undefined);
-        act(() => {
-            result.current.handleChoiceFunction("clear");
-        });
-        expect(result.current.choice).toEqual("clear");
-        //expect(result.current.hideOrShowCss['display']).toEqual("none");
+  it("set to clear", () => {
+    const { result } = renderHook(useSaveOrClearHook);
+    expect(result.current.choice).toEqual(undefined);
+    act(() => {
+      result.current.handleChoiceFunction("clear");
     });
+    expect(result.current.choice).toEqual("clear");
+    expect(result.current.hideOrShowCss["display"]).toEqual("none");
+  });
 });
