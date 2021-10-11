@@ -1,8 +1,5 @@
 import React from "react";
 import { render, unmountComponentAtNode } from "react-dom";
-// 
-
-import useExampleCustomReactHook from './useExampleCustomReactHook.js';
 import { renderHook, act } from '@testing-library/react-hooks';
 import App from "./App";
 import saveOrClearHook from './hooks/SaveOrClearHook.js';
@@ -20,76 +17,30 @@ afterEach(() => {
     container.remove();
     container = null;
 });
-describe('useExampleCustomReactHook', () => {
-    // it("render the App", () => {
-    //     act(() => { render(<App />, container); });
-    //     const isOk = container.textContent.includes("Save to server");
-    //     expect(isOk).toBe(true);
-    // });
+describe('Test the hooks', () => {
 
 
-    it('Should provide a default message', () => {
-        const defaultMessage = "default example message";
-        const { result } = renderHook(useExampleCustomReactHook);
-        expect(result.current.message).toEqual(defaultMessage);
-    });
-
-    it('Should update the message', () => {
-        const updatedMessage = 'hello world!';
-        const { result } = renderHook(useExampleCustomReactHook);
-        const defaultMessage = "default example message";
-        expect(result.current.message).toEqual(defaultMessage);
-
-        act(() => {
-            result.current.setMessage(updatedMessage);
-        });
-
-        expect(result.current.message).toEqual(updatedMessage);
-    });
-
-
-    it('Should update the message', () => {
-        const defaultMessage = "default example message";
-
-        const updatedMessage = 'hello world!';
-        const { result } = renderHook(useExampleCustomReactHook);
-        expect(result.current.message).toEqual(defaultMessage);
-
-        act(() => {
-            result.current.setMessage(updatedMessage);
-        });
-
-        expect(result.current.message).toEqual(updatedMessage);
-    });
-
-
-
-    it('Should update the message via my thing', () => {
-        const defaultMessage = "default example message";
-
-        const updatedMessage = 'kittycat';
-        const { result } = renderHook(useExampleCustomReactHook);
-        expect(result.current.message).toEqual(defaultMessage);
-
-        act(() => {
-            result.current.setMyMessage(updatedMessage);
-        });
-
-        expect(result.current.message).toEqual("kittycat");
-    });
-
-
-    it('save', () => {
-
+    it('set to save', () => {
         const { result } = renderHook(saveOrClearHook);
         expect(result.current.choice).toEqual(undefined);
-
         act(() => {
-            result.current.handleChoice("save");
+            result.current.handleChoiceFunction("save");
         });
-
         expect(result.current.choice).toEqual("save");
+        expect(result.current.hideOrShowCss['display']).toEqual("block");
     });
 
-
+    it('set to clear', () => {
+        const { result } = renderHook(saveOrClearHook);
+        expect(result.current.choice).toEqual(undefined);
+        act(() => {
+            result.current.handleChoiceFunction("save");
+            result.current.handleChoiceFunction("save");
+            result.current.handleChoiceFunction("save");
+            result.current.handleChoiceFunction("save");
+            result.current.handleChoiceFunction("clear");
+        });
+        expect(result.current.choice).toEqual("clear");
+        expect(result.current.hideOrShowCss['display']).toEqual("none");
+    });
 });

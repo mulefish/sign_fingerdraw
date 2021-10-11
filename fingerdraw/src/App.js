@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState } from 'react';
+// import { useState } from 'react';
 import Canvas from './MyCanvas2.js'
 import saveOrClearHook from './hooks/SaveOrClearHook.js';
 
@@ -25,71 +25,20 @@ const dot = {
 
 function App() {
 
-  const [choice, handleChoice] = saveOrClearHook();
-
-
-  const [saveTrigger, setSaveTrigger] = useState(0);
-  const [clearTrigger, setClearTrigger] = useState(0);
-  const [showImage, setShowImage] = useState({ display: 'none' });
-  // useEffect(() => {
-  //   if (saveTrigger > clearTrigger) {
-  //     setShowImage({ display: 'block' });
-  //   } else {
-  //     setShowImage({ display: 'none' });
-  //   }
-  // }, [saveTrigger, clearTrigger]);
-
-  const saveOrClear = (whence) => {
-    if (whence === "clear") {
-      setClearTrigger(clearTrigger + 1)
-      setSaveTrigger(0)
-      setShowImage({ display: 'none' });
-
-      // handleChoice("clear")
-      // console.log("HELLO CHOICE " + choice)
-
-      handleChoice("clear")
-      console.log("HELLO CHOICE " + choice)
-
-    } else {
-      setClearTrigger(0)
-      setSaveTrigger(saveTrigger + 1)
-      setShowImage({ display: 'block' });
-
-      handleChoice("save")
-      console.log("HELLO CHOICE " + choice)
-
-
-    }
-  }
-
-  // handleChoice("save")
-  // console.log("HELLO CHOICE " + choice)
-
-
+  const [choice, hideOrShowCss, handleChoiceFunction] = saveOrClearHook();
 
   return (
     <div>
       <div style={border}>
-        <Canvas width={width} height={height} saveTrigger={saveTrigger} clearTrigger={clearTrigger} />
+        <Canvas width={width} height={height} actionChoice={choice} />
       </div>
-      <button onClick={() => saveOrClear("clear")}>clear</button>
-      <button onClick={() => saveOrClear("save")}>save</button>
+      <button onClick={() => handleChoiceFunction("clear")}>clear</button>
+      <button onClick={() => handleChoiceFunction("save")}>save</button>
       <hr />
-      <div style={showImage}>
+      <div style={hideOrShowCss}>
         <img alt='signature' style={border} src="" id='imageToSave' width='100'></img>
       </div>
 
-
-      <div style={note}>
-        TODOs: {clearTrigger}
-        <br></br>
-        <span style={dot}></span> Save to server
-        <br></br>
-        <span style={dot}></span> Make this touch aware
-        <br></br>
-        <span style={dot}></span> Maybe convert to React Native
-      </div>
     </div >)
 }
 export default App

@@ -28,7 +28,7 @@ function dataURLtoBlob(dataURL) {
 };
 
 
-const Canvas = ({ width, height, saveTrigger, clearTrigger }) => {
+const Canvas = ({ width, height, actionChoice }) => {
     // const r = Math.random()
     // return <div>hello {width} and {height} !! {r}</div>
     const canvasRef = useRef(null);
@@ -48,7 +48,7 @@ const Canvas = ({ width, height, saveTrigger, clearTrigger }) => {
         const canvas = canvasRef.current;
         const image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
         setEventCounter(eventCounter + 1);
-        console.log(`%c ${eventCounter} ${saveTrigger} TODO! Save blob to server! `, ORANGE)
+        console.log(`%c ${eventCounter} save! `, ORANGE)
         // eslint-disable-next-line no-unused-vars
         const blob = dataURLtoBlob(image); // Ready to save!  
         document.getElementById("imageToSave").src = image;
@@ -58,25 +58,20 @@ const Canvas = ({ width, height, saveTrigger, clearTrigger }) => {
         const canvas = canvasRef.current;
         const context = canvas.getContext('2d');
         setEventCounter(eventCounter + 1);
-        console.log(`%c ${eventCounter} ${clearTrigger} TODO! clear! `, BLUE)
+        console.log(`%c ${eventCounter} clear! `, BLUE)
         context.clearRect(0, 0, canvas.width, canvas.height);
         const widget = document.getElementById("imageToSave");
         widget.src = "";
     }
 
     useEffect(() => {
-        if (saveTrigger > 0) {
+        if (actionChoice === "save") {
             doSave()
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [saveTrigger]);
-
-    useEffect(() => {
-        if (clearTrigger > 0) {
+        } else if (actionChoice === "clear") {
             doClear()
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [clearTrigger]);
+    }, [actionChoice]);
 
 
 

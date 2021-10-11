@@ -15,16 +15,21 @@ import { useState } from 'react';
 // export const defaultMessage = 'default example message';
 export default function SaveOrClearHook() {
     const [choice, setChoice] = useState(undefined);
-    function handleChoice(whence) {
+    const [hideOrShowCss, setHideOrShowCss] = useState({})
+    function handleChoiceFunction(whence) {
         // setMessage(choice)
         if (whence === "save") {
+            setHideOrShowCss({ 'display': 'block' })
             setChoice("save")
         } else {
+            setHideOrShowCss({ 'display': 'none' })
             setChoice("clear")
         }
     }
+    const o = {}
     return {
         choice,
-        handleChoice
+        o,
+        handleChoiceFunction
     };
 }
