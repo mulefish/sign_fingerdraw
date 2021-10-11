@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useState } from 'react';
 import Canvas from './MyCanvas2.js'
 
@@ -26,21 +26,36 @@ function App() {
   const [saveTrigger, setSaveTrigger] = useState(0);
   const [clearTrigger, setClearTrigger] = useState(0);
   const [showImage, setShowImage] = useState({ display: 'none' });
-  useEffect(() => {
-    if (saveTrigger > clearTrigger) {
-      setShowImage({ display: 'block' });
-    } else {
+  // useEffect(() => {
+  //   if (saveTrigger > clearTrigger) {
+  //     setShowImage({ display: 'block' });
+  //   } else {
+  //     setShowImage({ display: 'none' });
+  //   }
+  // }, [saveTrigger, clearTrigger]);
+
+  const saveOrClear = (whence) => {
+    if (whence === "clear") {
+      setClearTrigger(clearTrigger + 1)
+      setSaveTrigger(0)
       setShowImage({ display: 'none' });
+    } else {
+      setClearTrigger(0)
+      setSaveTrigger(saveTrigger + 1)
+      setShowImage({ display: 'block' });
     }
-  }, [saveTrigger, clearTrigger]);
+  }
+
+
+
 
   return (
     <div>
       <div style={border}>
         <Canvas width={width} height={height} saveTrigger={saveTrigger} clearTrigger={clearTrigger} />
       </div>
-      <button onClick={() => setClearTrigger(clearTrigger + 1)}>clear</button>
-      <button onClick={() => setSaveTrigger(saveTrigger + 1)}>save</button>
+      <button onClick={() => saveOrClear("clear")}>clear</button>
+      <button onClick={() => saveOrClear("save")}>save</button>
       <hr />
       <div style={showImage}>
         <img alt='signature' style={border} src="" id='imageToSave' width='100'></img>
