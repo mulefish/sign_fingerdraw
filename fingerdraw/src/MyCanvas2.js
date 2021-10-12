@@ -1,20 +1,13 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
+
+///// HOW COME THIS DOES NOT WORK?
+// import useDataUrlToBlob from "./hooks/useDataUrlToBlob.js";
+
 // eslint-disable-next-line no-unused-vars
 import X from "./hooks/helpers.js";
-// // eslint-disable-next-line no-unused-vars
-// const GRAY = "background:#e0e0e0;"
-// // eslint-disable-next-line no-unused-vars
-// const RED = "background:#ff0000;"
-// // eslint-disable-next-line no-unused-vars
-// const ORANGE = "background:#FFD580;"
-// // eslint-disable-next-line no-unused-vars
-// const BLUE = "background:#ADD8E6;"
 
 function dataURLtoBlob(dataURL) {
-  console.log(`ONE %c ${dataURL}`, X.RED);
-  // Make it easy to save as a file
   let array, binary, i, len;
-  // Note to self: "The atob() method decodes a base-64 encoded string"
   binary = atob(dataURL.split(",")[1]);
   array = [];
   i = 0;
@@ -26,19 +19,16 @@ function dataURLtoBlob(dataURL) {
   const blob = new Blob([new Uint8Array(array)], {
     type: "image/png",
   });
-  console.log(`TWO %c  ${blob}`, X.RED);
-
   return blob;
-  // TODO! Send the blob to the server!
 }
 
 const Canvas = ({ width, height, actionChoice }) => {
-  // const r = Math.random()
-  // return <div>hello {width} and {height} !! {r}</div>
+
   const canvasRef = useRef(null);
   const [isPainting, setIsPainting] = useState(false);
   const [mousePosition, setXY] = useState(undefined);
   const [eventCounter, setEventCounter] = useState(0);
+  // const imageHook = useDataUrlToBlob();
 
   const startPaint = useCallback((event) => {
     const xy = getXY(event);
@@ -53,18 +43,20 @@ const Canvas = ({ width, height, actionChoice }) => {
     const image = canvas
       .toDataURL("image/png")
       .replace("image/png", "image/octet-stream");
+    // imageHook.convertToBlobFunction(image)
+
     setEventCounter(eventCounter + 1);
     console.log(`%c ${eventCounter} save! `, X.ORANGE);
     // eslint-disable-next-line no-unused-vars
     const blob = dataURLtoBlob(image); // Ready to save!
     document.getElementById("imageToSave").src = image;
+
   };
 
   const doClear = () => {
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
     setEventCounter(eventCounter + 1);
-    console.log(`%c ${eventCounter} clear! `, X.BLUE);
     context.clearRect(0, 0, canvas.width, canvas.height);
     const widget = document.getElementById("imageToSave");
     widget.src = "";
