@@ -1,5 +1,4 @@
 import React from "react";
-// import { useState } from 'react';
 import SignatureCanvas from "./SignatureCanvas.js";
 import useSaveOrClearHook from "./hooks/useSaveOrClearHook.js";
 
