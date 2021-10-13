@@ -1,4 +1,5 @@
 import { useState } from "react";
+// eslint-disable-next-line no-unused-vars
 import X from ".//helpers.js";
 
 const useDataUrlToBlob = () => {
@@ -14,14 +15,11 @@ const useDataUrlToBlob = () => {
       i++;
     }
     const _blob = new Blob([new Uint8Array(array)], { type: "image/png" })
-    console.log(`AAAA %c ${_blob}`, X.BLUE)
     setBlob(_blob)
   }
-  console.log(`BBBB %c ${blob}`, X.ORANGE)
   return {
     blob,
     convertToBlobFunction,
   };
-
 };
 export default useDataUrlToBlob;

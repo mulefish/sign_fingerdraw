@@ -1,34 +1,25 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 
 ///// HOW COME THIS DOES NOT WORK?
-// import useDataUrlToBlob from "./hooks/useDataUrlToBlob.js";
+import useDataUrlToBlob from "./hooks/useDataUrlToBlob.js"; // FINCH 
 
 // eslint-disable-next-line no-unused-vars
 import X from "./hooks/helpers.js";
 
-function dataURLtoBlob(dataURL) {
-  let array, binary, i, len;
-  binary = atob(dataURL.split(",")[1]);
-  array = [];
-  i = 0;
-  len = binary.length;
-  while (i < len) {
-    array.push(binary.charCodeAt(i));
-    i++;
-  }
-  const blob = new Blob([new Uint8Array(array)], {
-    type: "image/png",
-  });
-  return blob;
+function saveThisBlobToBackendAsImage(blob) {
+  // AXIOS or FETCH call to save blob here! 
+  // The backend would recieve this as a byte array of type image/png. 
+  // It would need to size it & save it & whatnot... 
+  console.log(`%cPretend AXOIS call here with ${blob.size} bytes of type ${blob.type}`, X.GREEN)
 }
 
 const Canvas = ({ width, height, actionChoice }) => {
-
   const canvasRef = useRef(null);
   const [isPainting, setIsPainting] = useState(false);
   const [mousePosition, setXY] = useState(undefined);
   const [eventCounter, setEventCounter] = useState(0);
-  // const imageHook = useDataUrlToBlob();
+
+  const imageHook = useDataUrlToBlob(); // FINCH 
 
   const startPaint = useCallback((event) => {
     const xy = getXY(event);
@@ -43,15 +34,18 @@ const Canvas = ({ width, height, actionChoice }) => {
     const image = canvas
       .toDataURL("image/png")
       .replace("image/png", "image/octet-stream");
-    // imageHook.convertToBlobFunction(image)
+
+    imageHook.convertToBlobFunction(image);
 
     setEventCounter(eventCounter + 1);
-    console.log(`%c ${eventCounter} save! `, X.ORANGE);
-    // eslint-disable-next-line no-unused-vars
-    const blob = dataURLtoBlob(image); // Ready to save!
     document.getElementById("imageToSave").src = image;
-
   };
+
+  useEffect(() => {
+    if (imageHook.blob !== undefined) {
+      saveThisBlobToBackendAsImage(imageHook.blob)
+    }
+  }, [imageHook.blob])
 
   const doClear = () => {
     const canvas = canvasRef.current;

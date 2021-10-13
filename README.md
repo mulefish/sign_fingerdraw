@@ -20,3 +20,14 @@ npm test tdd.test.js
 
 Here is screen cap
 ![screencap.png](screencap.png)
+npm test tdd.test.js
+
+# Deps
+
+npm install --save-dev @testing-library/react-hooks
+npm install --save-dev react-test-renderer
+
+# Notes
+
+// eslint-disable-next-line no-unused-vars  
+http://localhost:3000/add_to_pdf.html

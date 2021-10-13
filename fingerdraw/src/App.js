@@ -1,6 +1,6 @@
 import React from "react";
 // import { useState } from 'react';
-import Canvas from "./MyCanvas2.js";
+import SignatureCanvas from "./SignatureCanvas.js";
 import useSaveOrClearHook from "./hooks/useSaveOrClearHook.js";
 
 const width = window.innerWidth;
@@ -29,7 +29,7 @@ function App() {
   return (
     <div>
       <div style={border}>
-        <Canvas
+        <SignatureCanvas
           width={width}
           height={height}
           actionChoice={choiceHook.choice}
