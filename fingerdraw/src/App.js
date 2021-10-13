@@ -21,6 +21,9 @@ const dot = {
   display: "inline-block",
   marginLeft: "6px",
 };
+const href = {
+  color: "#FFD580",
+};
 
 function App() {
   const choiceHook = useSaveOrClearHook();
@@ -55,6 +58,11 @@ function App() {
         <div style={dot}></div> make touch aware!<br></br>
         <div style={dot}></div> insert into PDF!<br></br>
         <div style={dot}></div> maybe convert to react native...<br></br>
+        <div style={dot}></div>{" "}
+        <a style={href} href="/add_to_pdf.html">
+          /add_to_pdf.html 2
+        </a>
+        <br></br>
         <br />
       </div>
     </div>
