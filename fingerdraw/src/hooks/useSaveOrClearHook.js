@@ -1,8 +1,8 @@
 import { useState } from "react";
 
 export default function useSaveOrClearHook() {
-  const [choice, setChoice] = useState({ display: "none" });
-  const [hideOrShowCss, setHideOrShowCss] = useState({});
+  const [choice, setChoice] = useState("");
+  const [hideOrShowCss, setHideOrShowCss] = useState({ display: "none" });
   function handleChoiceFunction(whence) {
     if (whence === "save") {
       setHideOrShowCss({ display: "block" });

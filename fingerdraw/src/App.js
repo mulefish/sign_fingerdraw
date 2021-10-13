@@ -41,7 +41,7 @@ function App() {
         save
       </button>
       <hr />
-      <div>
+      <div style={choiceHook.hideOrShowCss}>
         <img
           alt="signature"
           style={border}
