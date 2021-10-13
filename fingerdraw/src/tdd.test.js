@@ -17,6 +17,7 @@ describe("Test the hooks", () => {
     const { result } = renderHook(useSaveOrClearHook);
     // expect(result.current.choice).toEqual(undefined);
     act(() => {
+      result.current.handleChoiceFunction("save");
       result.current.handleChoiceFunction("clear");
     });
     expect(result.current.choice).toEqual("clear");

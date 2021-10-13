@@ -34,15 +34,11 @@ const SignatureCanvas = ({ width, height, actionChoice }) => {
 
         imageHook.convertToBlobFunction(image);
 
+
         setEventCounter(eventCounter + 1);
         document.getElementById("imageToSave").src = image;
+        console.log(`%c ${eventCounter} SAVE`, X.ORANGE)
     };
-
-    useEffect(() => {
-        if (imageHook.blob !== undefined) {
-            saveThisBlobToBackendAsImage(imageHook.blob)
-        }
-    }, [imageHook.blob])
 
     const doClear = () => {
         const canvas = canvasRef.current;
@@ -51,6 +47,8 @@ const SignatureCanvas = ({ width, height, actionChoice }) => {
         context.clearRect(0, 0, canvas.width, canvas.height);
         const widget = document.getElementById("imageToSave");
         widget.src = "";
+        console.log(`%c ${eventCounter} CLEAR`, X.ORANGE)
+
     };
 
     useEffect(() => {
@@ -61,6 +59,12 @@ const SignatureCanvas = ({ width, height, actionChoice }) => {
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [actionChoice]);
+
+    useEffect(() => {
+        if (imageHook.blob !== undefined) {
+            saveThisBlobToBackendAsImage(imageHook.blob)
+        }
+    }, [imageHook.blob])
 
     useEffect(() => {
         if (!canvasRef.current) {
