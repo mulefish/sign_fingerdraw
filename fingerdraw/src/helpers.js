@@ -5,5 +5,5 @@ const X = {
   BLUE: "background:#ADD8E6;",
   GREEN: "background:#90ee90;",
 };
-// export default X;
-export { X };
+const NILL = "NILL"; // nill/null/undefined value
+export { X, NILL };

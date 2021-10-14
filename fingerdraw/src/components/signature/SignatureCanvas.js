@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 
 import useDataUrlToBlob from "./hooks/useDataUrlToBlob.js";
-import { X } from "./hooks/helpers.js";
+import { X } from "../../helpers.js";
 
 function saveThisBlobToBackendAsImage(blob) {
   // AXIOS or FETCH call to save blob here!

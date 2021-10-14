@@ -1,6 +1,6 @@
 import { useState } from "react";
 // eslint-disable-next-line no-unused-vars
-import X from ".//helpers.js";
+import X from "../../../helpers.js";
 
 const useDataUrlToBlob = () => {
   const [blob, setBlob] = useState(undefined);
