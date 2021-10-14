@@ -1,10 +1,36 @@
 import { renderHook, act } from "@testing-library/react-hooks";
+import { render } from "@testing-library/react";
 import useSaveOrClearHook from "../signature/hooks/useSaveOrClearHook.js";
 import useDataUrlToBlob from "../signature/hooks/useDataUrlToBlob.js";
 import types from "../signature/redux/types.js";
 import thunks from "../signature/redux/thunks.js";
 import actions from "../signature/redux/actions.js";
 import reducer from "../signature/redux/reducers.js";
+import MyButton from "../something/MyButton.js";
+import { Provider as ReduxProvider } from "react-redux";
+import { rootReducer } from "../../redux/reduxStore.js";
+import { createStore, applyMiddleware } from "redux";
+import { composeWithDevTools } from "redux-devtools-extension/developmentOnly";
+import thunk from "redux-thunk";
+
+describe("Test Redux stuff", () => {
+  it("Trace's class", () => {
+    render(<MyButton></MyButton>, {
+      wrapper: ({ children }) => {
+        const store = createStore(
+          rootReducer,
+          {
+            testInfo: "one",
+            testStatus: "two",
+          },
+          composeWithDevTools(applyMiddleware(thunk))
+        );
+        return <ReduxProvider store={rootReducer}>{children}</ReduxProvider>;
+      },
+    });
+    // console.log(JSON.stringify(rootReducer, null, 2));
+  });
+});
 
 describe("Test the component/signature hooks", () => {
   it("set to save", () => {
