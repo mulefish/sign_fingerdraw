@@ -2,7 +2,7 @@ import { renderHook, act } from "@testing-library/react-hooks";
 import useSaveOrClearHook from "../signature/hooks/useSaveOrClearHook.js";
 import useDataUrlToBlob from "../signature/hooks/useDataUrlToBlob.js";
 
-describe("Test the hooks", () => {
+describe("Test the component/signature hooks", () => {
   it("set to save", () => {
     const { result } = renderHook(useSaveOrClearHook);
     // expect(result.current.choice).toEqual(undefined);
