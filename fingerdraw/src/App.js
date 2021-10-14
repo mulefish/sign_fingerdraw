@@ -1,32 +1,22 @@
 import React from "react";
 import SignatureCanvas from "./components/signature/SignatureCanvas.js";
 import useSaveOrClearHook from "./components/signature/hooks/useSaveOrClearHook.js";
-
-const width = window.innerWidth;
-const height = window.innerHeight * 0.3;
-const border = {
-  border: "1px solid #e0e0e0",
-};
-const note = {
-  position: "relative",
-  top: "10px",
-  left: "40px",
-  color: "#606060",
-};
-const dot = {
-  height: "6px",
-  width: "6px",
-  backgroundColor: "#FFD580",
-  borderRadius: "100%",
-  display: "inline-block",
-  marginLeft: "6px",
-};
-const href = {
-  color: "#FFD580",
-};
-
+import { useSelector, useDispatch } from "react-redux";
+// eslint-disable-next-line no-unused-vars
+import { X, height, width, border, dot, note, href } from "./helpers.js";
+import thunks from "./components/signature/redux/thunks.js";
 function App() {
   const choiceHook = useSaveOrClearHook();
+
+  const dispatch = useDispatch();
+
+  const testInfo = useSelector((state) => state.Reducer.testInfo);
+
+  function reduxTest(msg) {
+    dispatch(thunks.getTest("hello my dear"));
+
+    // alert("msg and " + testInfo);
+  }
 
   return (
     <div>
@@ -64,6 +54,10 @@ function App() {
         </a>
         <br></br>
         <br />
+        {/* // This button is just here to validate that Redux is set up correctly.  */}
+        <button onClick={() => reduxTest("hello")}>
+          reduxTest and thunk test! testInfo = {testInfo}
+        </button>
       </div>
     </div>
   );

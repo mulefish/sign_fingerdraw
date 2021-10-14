@@ -1,18 +1,20 @@
 import types from "./types";
 
-const setTestInfo = (info) => {
-    const obj = {
-        type: types.setTestInfo,
-        testInfo: testInfo
-    }
-}
+const setTestInfo = (testInfo) => {
+  const obj = {
+    type: types.setTestInfo,
+    testInfo: testInfo,
+  };
+  return obj;
+};
 const setTestStatus = (testStatus) => {
-    const obj = {
-        type: types.setTestStatus,
-        testStatus: testStatus
-    }
-}
+  const obj = {
+    type: types.setTestStatus,
+    testStatus: testStatus,
+  };
+  return obj;
+};
 export default {
-    setTestInfo,
-    setTestStatus
-}
+  setTestInfo,
+  setTestStatus,
+};
