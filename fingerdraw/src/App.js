@@ -1,6 +1,6 @@
 import React from "react";
-import SignatureCanvas from "./SignatureCanvas.js";
-import useSaveOrClearHook from "./hooks/useSaveOrClearHook.js";
+import SignatureCanvas from "./components/signature/SignatureCanvas.js";
+import useSaveOrClearHook from "./components/signature/hooks/useSaveOrClearHook.js";
 
 const width = window.innerWidth;
 const height = window.innerHeight * 0.3;
