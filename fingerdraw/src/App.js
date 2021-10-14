@@ -10,7 +10,7 @@ function App() {
 
   const dispatch = useDispatch();
 
-  const testInfo = useSelector((state) => state.Reducer.testInfo);
+  const testInfo = useSelector((state) => state.signatureReducer.testInfo);
 
   function reduxTest(msg) {
     dispatch(thunks.getTest("hello my dear"));

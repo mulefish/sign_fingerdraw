@@ -5,7 +5,7 @@ const initalState = {
   testInfo: NILL,
   testStatus: NILL,
 };
-export default function (state = initalState, action) {
+export default function signatureReducer(state = initalState, action) {
   switch (action.type) {
     case types.setTestInfo:
       return {
