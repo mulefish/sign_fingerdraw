@@ -45,56 +45,54 @@ describe("Test the component/signature hooks", () => {
 
 describe("Test the component/sgnature redux stuff", () => {
   it("types.js is ok", () => {
-    let expected = ['setTestInfo', 'setTestStatus']; // The types.js object should have these keys and values
+    let expected = ["setTestInfo", "setTestStatus"]; // The types.js object should have these keys and values
     let isOk = true;
-    expected.forEach(item => {
+    expected.forEach((item) => {
       if (!types[item]) {
         isOk = false;
       } else if (types[item] !== item) {
         isOk = false;
       }
-    })
+    });
     expect(isOk).toEqual(true);
-  })
-  it("types.js type check", () => {
-    expect(types.setTestInfo).toEqual('setTestInfo');
-    expect(types.setTestStatus).toEqual('setTestStatus');
-  })
+  });
+
+  it("types.js type direct check", () => {
+    expect(types.setTestInfo).toEqual("setTestInfo");
+    expect(types.setTestStatus).toEqual("setTestStatus");
+  });
 
   it("thunks is setup ok and compiles and contains the proper 'getTest()' function", () => {
-    const expected = "function"
-    const actual = (typeof thunks.getTest)
+    const expected = "function";
+    const actual = typeof thunks.getTest;
     expect(expected).toEqual(actual);
-  })
-  it("actions is setup ok and compiles and contains the proper 'setTestInfo()' and 'setTestStatus()' functions", () => {
-    const expected1 = "function";
-    const expected2 = "function";
-    const actual1 = (typeof actions.setTestInfo);
-    const actual2 = (typeof actions.setTestStatus);
-    const isOk = actual1 === expected1 && actual2 === expected2;
-    expect(isOk).toEqual(true);
-  })
+  });
 
   it("actions is setup ok and compiles and contains the proper 'setTestInfo()' and 'setTestStatus()' functions", () => {
     const expected1 = "function";
     const expected2 = "function";
-    const actual1 = (typeof actions.setTestInfo);
-    const actual2 = (typeof actions.setTestStatus);
+    const actual1 = typeof actions.setTestInfo;
+    const actual2 = typeof actions.setTestStatus;
     const isOk = actual1 === expected1 && actual2 === expected2;
     expect(isOk).toEqual(true);
-  })
-  // it("reducer is setup ok ( direct test )", () => {
-  //   const isOk = true;
-  //   const fakeAction = {
-  //     type: types.setTestInfo,
-  //     testInfo: "Hello world"
-  //   }
-  //   console.log(fakeAction)
-  //   reducer(fakeAction);
+  });
 
-  //   //console.log(actual)
-  //   expect(isOk).toEqual(true);
-  // })
+  it("reducer is setup ok ( direct test )", () => {
+    const expected1 = "Dirty dirty kitten";
+    const expected2 = "wet wet sky";
+    const fakeAction1 = {
+      type: types.setTestInfo,
+      testInfo: expected1,
+    };
+    const actual1 = reducer({}, fakeAction1);
+    const fakeAction2 = {
+      type: types.setTestStatus,
+      testStatus: expected2,
+    };
+    const actual2 = reducer({}, fakeAction2);
+    const isOk =
+      actual1.testInfo === expected1 && actual2.testStatus === expected2;
 
-
-})
+    expect(isOk).toEqual(true);
+  });
+});

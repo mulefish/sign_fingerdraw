@@ -1,6 +1,5 @@
 const types = {
-    setTestInfo: 'setTestInfo',
-    setTestStatus: 'setTestStatus',
-}
+  setTestInfo: "setTestInfo",
+  setTestStatus: "setTestStatus",
+};
 export default types;
-
