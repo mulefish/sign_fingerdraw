@@ -5,19 +5,8 @@ import MyButton from "./components/something/MyButton.js";
 import { useSelector, useDispatch } from "react-redux";
 // eslint-disable-next-line no-unused-vars
 import { X, height, width, border, dot, note, href } from "./helpers.js";
-//import thunks from "./components/signature/redux/thunks.js";
 function App() {
   const choiceHook = useSaveOrClearHook();
-
-  //const dispatch = useDispatch();
-
-  //const testInfo = useSelector((state) => state.signatureReducer.testInfo);
-
-  // function reduxTest(msg) {
-  //   dispatch(thunks.getTest("hello my dear"));
-
-  //   // alert("msg and " + testInfo);
-  // }
 
   return (
     <div>
