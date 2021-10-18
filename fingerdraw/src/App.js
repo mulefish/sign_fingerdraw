@@ -1,13 +1,13 @@
 import React from "react";
 import SignatureCanvas from "./components/signature/SignatureCanvas.js";
 import useSaveOrClearHook from "./components/signature/hooks/useSaveOrClearHook.js";
-import MyButton from "./components/something/MyButton.js";
+// import MyButton from "./components/something/MyButton.js";
 import { useSelector, useDispatch } from "react-redux";
 // eslint-disable-next-line no-unused-vars
 import { X, height, width, border, dot, note, href } from "./helpers.js";
 function App() {
   const choiceHook = useSaveOrClearHook();
-
+  const testInfo = "This string is grist for a test.";
   return (
     <div>
       <div style={border}>
@@ -23,6 +23,7 @@ function App() {
       <button onClick={() => choiceHook.handleChoiceFunction("save")}>
         save
       </button>
+
       <hr />
       <div style={choiceHook.hideOrShowCss}>
         <img
@@ -48,7 +49,7 @@ function App() {
         {/* <button onClick={() => reduxTest("hello")}>
           reduxTest and thunk test! testInfo = {testInfo}
         </button> */}
-        <MyButton />
+        {/* <MyButton /> */}
       </div>
     </div>
   );

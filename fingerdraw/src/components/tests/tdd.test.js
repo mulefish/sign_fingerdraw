@@ -6,7 +6,7 @@ import types from "../signature/redux/types.js";
 import thunks from "../signature/redux/thunks.js";
 import actions from "../signature/redux/actions.js";
 import reducer from "../signature/redux/reducers.js";
-import MyButton from "../reduxTestButton/MyButton.js";
+//import My Button from "../reduxTestButton/My Button.js";
 import { Provider as ReduxProvider } from "react-redux";
 import { rootReducer } from "../../redux/reduxStore.js";
 import { createStore, applyMiddleware } from "redux";
