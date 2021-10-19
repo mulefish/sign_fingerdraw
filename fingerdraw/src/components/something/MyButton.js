@@ -6,7 +6,7 @@ function MyButton() {
   const testInfo = useSelector((state) => state.signatureReducer.testInfo);
 
   function reduxTest(msg) {
-    dispatch(thunks.getTest("hello my dear"));
+    dispatch(thunks.getTest("This uses redux! It does nothing really. It provides grist for a test."));
   }
 
   return (
